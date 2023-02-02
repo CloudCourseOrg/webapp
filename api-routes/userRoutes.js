@@ -5,7 +5,7 @@ const user = require("../services/user")
 const helper = require("../configuration/hash-helper")
 
 /**
- * POST METHOD
+ * POST METHOD.
  */
 router.post("/", user.createNewUser)
 
