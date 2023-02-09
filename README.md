@@ -1,8 +1,7 @@
-# webapp## Introduction
-
+# webapp## ## Introduction
 Node.js is a server-side JavaScript runtime environment. It allows developers to build fast and scalable network applications...
 
-Creating an API to perform post, get and update user data.  
+Creating an API to perform post, get and update user data data.  
 
 ## Prerequisites
 
@@ -23,7 +22,7 @@ Creating an API to perform post, get and update user data.
 - `jest test`: runs test suite
 
 ## Endpoints
-The following endpoints are available for operations: for user
+The following endpoints are available for operations:
 
 GET - http://localhost:4005/healthz/
 
@@ -33,17 +32,6 @@ PUT - http://localhost:4005/v1/user/{id}
 
 GET - http://localhost:4005/v1/user/{id}
 
-The following endpoints are available for operations: for product
-
-GET - http://localhost:4005/healthz/
-
-POST - http://localhost:4005/v1/product
-
-PUT - http://localhost:4005/v1/product/{id}
-
-Patch - http://localhost:4005/v1/product/{id}
-
-Delete - http://localhost:4005/v1/product/{id}
 
 ## Responds with following HTTP messages
 
@@ -80,6 +68,7 @@ http://localhost:4005/v1/user/ where you should see: "201 Created".
 
 http://localhost:4005/v1/user/self/ where you should see: "204 No Content".
 
+http://localhost:4005/v1/user/self where you should use: "204 No Content".
 
 ## Contributing
 Contributions are always welcome. Please create a pull request with a detailed description of change.
