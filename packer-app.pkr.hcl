@@ -15,17 +15,17 @@ variable "ssh_username" {
 
 variable "vpc_id" {
   type    = string
-  default = "vpc-098e4ef8f142b536e"
+  default = "vpc-096a07b78adff94cb"
 }
 
 variable "subnet_id" {
   type    = string
-  default = "	subnet-012a6abbd30584b72"
+  default = "subnet-058b473db9ffb91b7"
 }
 
 source "amazon-ebs" "app-ami" {
   region          = "${var.aws_region}"
-  ami_name        = "ami-1"
+  ami_name        = "ami-11"
   ami_description = "AMI test"
   ami_regions = [
     "us-east-1",
