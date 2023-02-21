@@ -41,7 +41,7 @@ source "amazon-ebs" "app-ami" {
   source_ami    = "${var.source_ami}"
   ssh_username  = "${var.ssh_username}"
   subnet_id     = "${var.subnet_id}"
-  vpc_id = "${var.vpc_id}"
+  vpc_id        = "${var.vpc_id}"
   profile       = "dev"
 
   launch_block_device_mappings {
@@ -54,10 +54,10 @@ source "amazon-ebs" "app-ami" {
 
 build {
   sources = ["source.amazon-ebs.app-ami"]
-  
+
   provisioner "file" {
-      source = "webapp.zip"
-      destination = "/home/ec2-user/webapp.zip"
+    source      = "webapp.zip"
+    destination = "/home/ec2-user/webapp.zip"
   }
 
   provisioner "shell" {

@@ -14,5 +14,5 @@ sudo systemctl enable mariadb
 
 unzip webapp.zip
 cd webapp
-npm I
+npm i
 DBHOST=localhost DBUSER=root DBPASS=password DATABASE=cloud_web PORT=3000 npm start
