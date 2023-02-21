@@ -15,12 +15,12 @@ variable "ssh_username" {
 
 variable "vpc_id" {
   type    = string
-  default = "vpc-0ed6bb552bcf330bd"
+  default = "vpc-098e4ef8f142b536e"
 }
 
 variable "subnet_id" {
   type    = string
-  default = "subnet-0074e79217ee7bf6e"
+  default = "	subnet-012a6abbd30584b72"
 }
 
 source "amazon-ebs" "app-ami" {
