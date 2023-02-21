@@ -4,6 +4,7 @@ on:
   pull_request:
     branches: [main]
 
+  workflow_dispatch:
 
 jobs:
   build:
@@ -29,13 +30,11 @@ jobs:
         #   path: dist
         #   format: zip
         #   destination: dist/build/webapp.zip
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Packer build
+        uses: ExitoLab/packer_build_action_aws@v0.2.10
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-      - name: Packer Init
-        run: packer init .
-      - name: Packer Build - Branches
-        run: packer build .
+          templateFile: 'packer-app.pkr.hcl'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
