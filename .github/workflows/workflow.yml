@@ -39,9 +39,11 @@ jobs:
       PKR_VAR_MYSQL_DB: ${{ secrets.DATABASE }}
 
     steps:
-
+    
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: Create zip archive
+      run: zip -r webapp.zip .
     - name: Install Packer
       run: sudo apt-get update && sudo apt-get install -y packer
     - name: Initialize packer
