@@ -25,17 +25,18 @@ jobs:
       - run: npm run test
       - name: Create zip archive
         run: zip -r webapp.zip .
-        # uses: vimtor/action-zip@v1
-        # with:
-        #   path: dist
-        #   format: zip
-        #   destination: dist/build/webapp.zip
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          PKR_VAR_MYSQL_USER: ${{ secrets.DATABASEUSER }}
+          PKR_VAR_MYSQL_PASSWORD: ${{ secrets.DATABASEPASSWORD }}
+          PKR_VAR_MYSQL_HOST: ${{ secrets.DATABASEHOST }}
+          PKR_VAR_MYSQL_PORT: ${{ secrets.PORT }}
+          PKR_VAR_MYSQL_DB: ${{ secrets.DATABASE }}
+
       - name: Packer Init
         run: packer init .
       - name: Packer Build - Branches

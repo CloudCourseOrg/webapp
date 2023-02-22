@@ -23,6 +23,26 @@ variable "subnet_id" {
   default = "subnet-012a6abbd30584b72"
 }
 
+variable "mysql_USER" {
+  type = string
+}
+
+variable "mysql_PASSWORD" {
+  type = string
+}
+
+
+variable "mysql_HOST" {
+  type = string
+}
+
+variable "mysql_PORT" {
+  type = string
+}
+
+variable "mysql_DB" {
+  type = string
+}
 source "amazon-ebs" "app-ami" {
   region          = "${var.aws_region}"
   ami_name        = "ami-11"
@@ -61,12 +81,10 @@ build {
   }
 
   provisioner "shell" {
-    // environment_vars = [
-    //   "DEBIAN_FRONTEND=noninteractive",
-    //   "CHECKPOINT_DISABLE=1"
-    // ]
-
+    
     script = "./webapp.sh"
+    environment_vars = ["mysql_USER=${var.mysql_USER}", "mysql_PASSWORD=${var.mysql_PASSWORD}", "mysql_HOST=${var.mysql_HOST}", "mysql_PORT=${var.mysql_PORT}", "mysql_DB=${var.mysql_DB}"]
+
 
   }
 }
