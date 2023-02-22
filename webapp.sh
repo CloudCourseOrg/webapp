@@ -14,11 +14,11 @@ sudo yum install mariadb mariadb-server -y
 # export PORT=${mysql_PORT}
 # export DATABASEHOST=${mysql_HOST}
 
-# export DATABASEUSER=${mysql_USER}
-# export DATABASEPASSWORD=${mysql_PASSWORD}
-# export DATABASE=${mysql_DB}
-# export PORT=${mysql_PORT}
-# export DATABASEHOST=${mysql_HOST}
+export DATABASEUSER=${mysql_USER}
+export DATABASEPASSWORD=${mysql_PASSWORD}
+export DATABASE=${mysql_DB}
+export PORT=${mysql_PORT}
+export DATABASEHOST=${mysql_HOST}
 
 sudo systemctl start mariadb
 sudo mysqladmin -u ${mysql_USER} password ${mysql_PASSWORD}
