@@ -36,7 +36,7 @@ jobs:
           PKR_VAR_MYSQL_HOST: ${{ secrets.DATABASEHOST }}
           PKR_VAR_MYSQL_PORT: ${{ secrets.PORT }}
           PKR_VAR_MYSQL_DB: ${{ secrets.DATABASE }}
-          aws_region : "us-east-1"
+          aws-region : "us-east-1"
 
       - name: Packer Init
         run: packer init .
