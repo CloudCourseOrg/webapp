@@ -26,19 +26,26 @@ jobs:
       - name: Create zip archive
         run: zip -r webapp.zip .
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          PKR_VAR_MYSQL_USER: ${{ secrets.DATABASEUSER }}
-          PKR_VAR_MYSQL_PASSWORD: ${{ secrets.DATABASEPASSWORD }}
-          PKR_VAR_MYSQL_HOST: ${{ secrets.DATABASEHOST }}
-          PKR_VAR_MYSQL_PORT: ${{ secrets.PORT }}
-          PKR_VAR_MYSQL_DB: ${{ secrets.DATABASE }}
-          aws-region : "us-east-1"
+  packer-build:
+    name: Packer Build
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      PKR_VAR_MYSQL_USER: ${{ secrets.DATABASEUSER }}
+      PKR_VAR_MYSQL_PASSWORD: ${{ secrets.DATABASEPASSWORD }}
+      PKR_VAR_MYSQL_HOST: ${{ secrets.DATABASEHOST }}
+      PKR_VAR_MYSQL_PORT: ${{ secrets.PORT }}
+      PKR_VAR_MYSQL_DB: ${{ secrets.DATABASE }}
 
-      - name: Packer Init
-        run: packer init .
-      - name: Packer Build - Branches
-        run: packer build .
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install Packer
+      run: sudo apt-get update && sudo apt-get install -y packer
+    - name: Initialize packer
+      run: packer init packer
+    - name: Build Packer image
+      run: packer build .
+      
