@@ -25,23 +25,28 @@ variable "subnet_id" {
 
 variable "mysql_USER" {
   type = string
+  default = "root"
 }
 
 variable "mysql_PASSWORD" {
   type = string
+  default = "password"
 }
 
 
 variable "mysql_HOST" {
   type = string
+  default = "127.0.0.1"
 }
 
 variable "mysql_PORT" {
   type = string
+  default = "4005"
 }
 
 variable "mysql_DB" {
   type = string
+  default = "cloud2"
 }
 source "amazon-ebs" "app-ami" {
   region          = "${var.aws_region}"
