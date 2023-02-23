@@ -3,7 +3,7 @@
         "host": "localhost",
         "port": 3306,
         "user": "root",
-        "password": "Harshila@123",
+        "password": "password",
         "database": "assignment4"
     }
 }

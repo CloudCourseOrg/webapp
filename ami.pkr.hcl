@@ -40,9 +40,9 @@ source "amazon-ebs" "amazon_linux_image" {
   ami_name = "csye6225_${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
   ami_description = "AMI for CSYE 225"
   ami_users = ["921273005274"]
-  ami_regions = [
-    var.aws_region
-  ]
+  # ami_regions = [
+  #   var.aws_region
+  # ]
 
   aws_polling {
     delay_seconds = 120

@@ -7,7 +7,7 @@ ExecStart=/home/ec2-user/.nvm/versions/node/v16.19.1/bin/node /home/ec2-user/web
 Environment=PORT=1700
 Environment=MYSQL_USERNAME=root
 Environment=MYSQL_DATABASE=assignment4
-Environment=MYSQL_ROOT_PASSWORD=Harshila@123
+Environment=MYSQL_ROOT_PASSWORD=password
 Environment=MYSQL_HOST=localhost
 Type=simple
 User=ec2-user
