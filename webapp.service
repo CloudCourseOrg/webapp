@@ -1,0 +1,11 @@
+[Unit]
+Description= Webapp
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node /home/ec2-user/webapp/app.js
+Restart=always
+User=ec2-user
+
+[Install]
+WantedBy=multi-user.target
