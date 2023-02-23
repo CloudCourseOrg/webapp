@@ -61,7 +61,7 @@ variable "instance_type" {
 
 variable "profile" {
   type = string
-  default="devPacker"
+  default="packer"
 }
 
 variable "device_name" {
