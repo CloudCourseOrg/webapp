@@ -3,6 +3,11 @@ Description= Webapp
 After=network.target
 
 [Service]
+Environment=PORT=3000
+Environment=DATABASEHOST=localhost
+Environment=DATABASEUSER=root
+Environment=DATABASEPASSWORD=password
+Environment=DATABASE=cloud_web
 ExecStart=/usr/bin/node /home/ec2-user/webapp/app.js
 Restart=always
 User=ec2-user

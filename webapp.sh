@@ -23,16 +23,16 @@ unzip webapp.zip -d webapp
 cd /home/ec2-user/webapp
 npm i
 
-
-
+#Giving exec writes to owner, user and group
+# chmod -R 755 node_modules/
+# rm -rf node_modules/
+# npm i
 
 sudo cp ./webapp.service /etc/systemd/system/
 
 sudo systemctl daemon-reload
 sudo systemctl enable webapp.service
-
-
-
+# sudo systemctl start webapp.service
 
 
 

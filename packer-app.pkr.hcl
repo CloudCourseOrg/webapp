@@ -25,7 +25,6 @@ variable "subnet_id" {
 
 variable "DATABASEUSER" {
   type = string
-  
 }
 
 variable "DATABASEPASSWORD" {
@@ -49,52 +48,19 @@ variable "DATABASE" {
   type = string
 }
 
-variable "ami_name" {
-  type = string
-  default="ami-1"
-}
-
-variable "instance_type" {
-  type = string
-  default="t2.micro"
-}
-
-variable "profile" {
-  type = string
-  default="packer"
-}
-
-variable "device_name" {
-  type = string
-  default="/dev/xvda"
-}
-
-variable "volume_size" {
-  type = number
-  default=8
-}
-
-variable "volume_type" {
-  type = string
-  default="gp2"
-}
-
-variable "region" {
-  type = list(string)
-  default=["us-east-1"]
-}
-
 variable "ami_users" {
   type    = list(string)
-  default = ["600779742576","921273005274"]
+  default = ["921273005274"]
 }
 
 source "amazon-ebs" "app-ami" {
   region          = "${var.aws_region}"
-  ami_name        = "${var.ami_name}"
-  ami_description = "AMI"
-  ami_regions = "${var.region}"
+  ami_name        = "ami-1"
+  ami_description = "AMI test"
   ami_users       =   var.ami_users
+  ami_regions = [
+    "us-east-1",
+  ]
 
   aws_polling {
     delay_seconds = 120
@@ -102,18 +68,18 @@ source "amazon-ebs" "app-ami" {
   }
 
 
-  instance_type = "${var.instance_type}"
+  instance_type = "t2.micro"
   source_ami    = "${var.source_ami}"
   ssh_username  = "${var.ssh_username}"
   subnet_id     = "${var.subnet_id}"
   vpc_id = "${var.vpc_id}"
-  profile       = "${var.profile}"
+  profile       = "dev"
 
   launch_block_device_mappings {
     delete_on_termination = true
-    device_name           = "${var.device_name}"
-    volume_size           = var.volume_size
-    volume_type           = "${var.volume_type}"
+    device_name           = "/dev/xvda"
+    volume_size           = 8
+    volume_type           = "gp2"
   }
 }
 
@@ -126,7 +92,8 @@ build {
   }
 
   provisioner "shell" {
-   
+
+
     script = "./webapp.sh"
     environment_vars = ["DATABASEUSER=${var.DATABASEUSER}", "DATABASEPASSWORD=${var.DATABASEPASSWORD}", "DATABASEHOST=${var.DATABASEHOST}", "PORT=${var.PORT}", "DATABASE=${var.DATABASE}", "DBPORT=${var.DBPORT}"]
 
