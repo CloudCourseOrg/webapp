@@ -75,7 +75,7 @@ source "amazon-ebs" "app-ami" {
   vpc_id = "${var.vpc_id}"
   profile       = "dev"
 
-  ebs_block_device {
+  launch_block_device_mappings {
     delete_on_termination = true
     device_name           = "/dev/xvda"
     volume_size           = 8
