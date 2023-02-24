@@ -9,10 +9,10 @@ const createProductModel = require("../models/product.model")
 
 const sequelize = new Sequelize(
   process.env.DATABASE,
-  process.env.DATABASEUSER,
-  process.env.DATABASEPASSWORD,
+  process.env.DBUSER,
+  process.env.DBPASS,
   {
-    host: process.env.DATABASEHOST,
+    host: process.env.DBHOST,
     dialect: "mysql",
     define: {
       freezeTableName: true,
