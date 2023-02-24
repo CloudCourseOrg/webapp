@@ -3,7 +3,7 @@ Description=CSYE 6225 webapp
 After=multi-user.target
 
 [Service]
-ExecStart=/home/ec2-user/.nvm/versions/node/v16.19.1/bin/node /home/ec2-user/webapp/server.js
+ExecStart=/home/ec2-user/.nvm/versions/node/v16.19.1/bin/node /home/ec2-user/webapp/app.js
 Type=simple
 User=ec2-user
 Restart=always
