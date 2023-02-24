@@ -49,11 +49,6 @@ variable "DATABASE" {
   type = string
 }
 
-variable "ami_name" {
-  type = string
-  default="ami-1"
-}
-
 variable "instance_type" {
   type = string
   default="t2.micro"
@@ -91,7 +86,7 @@ variable "ami_users" {
 
 source "amazon-ebs" "app-ami" {
   region          = "${var.aws_region}"
-  ami_name        = "${var.ami_name}"
+  ami_name = "csye6225_${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
   ami_description = "AMI"
   ami_regions = "${var.region}"
   ami_users       =   var.ami_users
