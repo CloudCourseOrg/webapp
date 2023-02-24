@@ -1,37 +1,17 @@
-const express = require("express")
-const router = express.Router()
+var express = require('express');
+var router = express.Router();
 
-const product = require("../services/product")
-const helper = require("../config/helper")
+var product = require('../services/product');
+var helper = require('../config/helper');
 
-/**
- * POST METHOD
- */
-router.post("/", helper.productAuthenticationCheck, product.createNewProduct)
+router.post('/', helper.pAuthCheck, product.createNewProduct);
 
-/**
- * GET METHOD
- */
-router.get("/:id", product.getProduct)
+router.get('/:id', product.getProduct);
 
-/**
- * PUT METHOD
- */
-router.put("/:id", helper.productAuthenticationCheck, product.putProductInfo)
+router.put('/:id', helper.pAuthCheck, product.putProductInfo);
 
-/**
- * PATCH METHOD
- */
-router.patch("/:id", helper.productAuthenticationCheck, product.patchProductInfo)
+router.patch('/:id', helper.pAuthCheck, product.patchProductInfo);
 
-/**
- * PUT METHOD
- */
-router.put("/:id", helper.productAuthenticationCheck, product.putProductInfo)
+router.delete('/:id', helper.pAuthCheck, product.deleteProduct);
 
-/**
- * DELETE METHOD
- */
-router.delete("/:id", helper.productAuthenticationCheck, product.deleteProduct)
-
-module.exports = router
+module.exports = router;
