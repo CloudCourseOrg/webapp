@@ -2,9 +2,9 @@
 
 sudo yum update -y
 
-export DATABASEHOST=${DATABASEHOST}
-export DATABASEUSER=${DATABASEUSER}
-export DATABASEPASSWORD=${DATABASEPASSWORD}
+export DBHOST=${DBHOST}
+export DBUSER=${DBUSER}
+export DBPASS=${DBPASS}
 export DATABASE=${DATABASE}
 export PORT=${PORT}
 export DBPORT=${DBPORT}
@@ -15,8 +15,8 @@ sudo yum install -y nodejs
 
 sudo yum install mariadb mariadb-server -y
 sudo systemctl start mariadb
-sudo mysqladmin -u ${DATABASEUSER} password ${DATABASEPASSWORD}
-mysqladmin -u ${DATABASEUSER} --password=${DATABASEPASSWORD} --host=${DATABASEHOST} --port=${DBPORT} create ${DATABASE}
+sudo mysqladmin -u ${DBUSER} password ${DBPASS}
+mysqladmin -u ${DBUSER} --password=${DBPASS} --host=${DBHOST} --port=${DBPORT} create ${DATABASE}
 sudo systemctl enable mariadb
 
 unzip webapp.zip -d webapp
