@@ -1,22 +1,13 @@
-const express = require("express")
-const router = express.Router()
+var express = require('express');
+var router = express.Router();
 
-const user = require("../services/user")
-const helper = require("../config/helper")
+var user = require('../services/user');
+var helper = require('../config/helper');
 
-/**
- * POST METHOD
- */
-router.post("/", user.createNewUser)
+router.post('/', user.createNewUser);
 
-/**
- * GET METHOD
- */
-router.get("/:id", helper.userAuthenticationCheck, user.getUser)
+router.get('/:id', helper.uAuthCheck, user.getUser);
 
-/**
- * PUT METHOD
- */
-router.put("/:id", helper.userAuthenticationCheck, user.updateUser)
+router.put('/:id', helper.uAuthCheck, user.updateUser);
 
-module.exports = router
+module.exports = router;
