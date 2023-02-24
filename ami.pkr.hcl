@@ -7,11 +7,6 @@ packer {
   }
 }
 
-variable "aws_region" {
-  type = string
-  default = "us-east-1"
-}
-
 variable "aws_access_key_id" {
   type = string
 }
@@ -20,32 +15,15 @@ variable "aws_secret_access_key" {
   type = string
 }
 
-variable "ssh_username" {
-  type = string
-  default = "ec2-user"
-}
 
-variable "subnet_id" {
-  type = string
-  default = "subnet-0bbabc693fb82b1e0"
-}
-
-variable "db_password" {
-  type = string
-}
-
-variable "ami_users" {
-  type = list(string)
-  default = []
-}
 
 source "amazon-ebs" "amazon_linux_image" {
   profile = "dev"
   ami_name = "csye6225_${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
-  ami_description = "AMI for CSYE 225"
-  ami_users = var.ami_users
+  ami_description = "AMI"
+  ami_users = ["921273005274"]
   ami_regions = [
-    var.aws_region
+    "us-east-1"
   ]
 
   aws_polling {
@@ -70,10 +48,10 @@ source "amazon-ebs" "amazon_linux_image" {
     volume_type = "gp2" 
   }
 
-  ssh_username = "${var.ssh_username}"
-  subnet_id = "${var.subnet_id}"
+  ssh_username = "ec2-user"
+  subnet_id = "subnet-0bbabc693fb82b1e0"
   instance_type = "t2.micro"
-  region = var.aws_region
+  region = "us-east-1"
   access_key = var.aws_access_key_id
   secret_key = var.aws_secret_access_key
 }
