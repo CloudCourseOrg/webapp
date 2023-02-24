@@ -1,61 +1,51 @@
-const { Sequelize, DataTypes } = require("sequelize")
+const { DataTypes } = require("sequelize");
 
-/**
- * Creating product model using sequelize
- */
 const createProductModel = (sequelize) => {
-  let Product = sequelize.define(
-    "product",
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-      },
-      name: {
-        type: DataTypes.STRING,
-      },
-      description: {
-        type: DataTypes.STRING,
-      },
-      sku: {
-        type: DataTypes.STRING,
-      },
-      manufacturer: {
-        type: DataTypes.STRING,
-      },
-      quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          min: 0,
-          max: 100,
+    let Product = sequelize.define("product", {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false
         },
-      },
-      date_added: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      date_last_updated: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      owner_user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+        name: {
+            type: DataTypes.STRING
+        },
+        description: {
+            type: DataTypes.STRING
+        },
+        sku: {
+            type: DataTypes.STRING
+        },
+        manufacturer: {
+            type: DataTypes.STRING
+        },
+        quantity: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 100
+            }
+        },
+        date_added: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        date_last_updated: {
+            type: DataTypes.DATE,
+            allowNull: false
+        }
     },
     {
-      updatedAt: "date_last_updated",
-      createdAt: "date_added",
+        updatedAt: 'date_last_updated',
+        createdAt: 'date_added',
     },
     {
-      initialAutoIncrement: 1,
-    }
-  )
+        initialAutoIncrement: 1,
+    });
 
-  return Product
+    return Product;
 }
 
-module.exports = createProductModel
+module.exports = createProductModel;
