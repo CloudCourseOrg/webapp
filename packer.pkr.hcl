@@ -23,17 +23,17 @@ variable "subnet_id" {
   default = "subnet-0bbabc693fb82b1e0"
 }
 
-variable "DATABASEUSER" {
+variable "DBUSER" {
   type = string
   
 }
 
-variable "DATABASEPASSWORD" {
+variable "DBPASS" {
   type = string
 }
 
 
-variable "DATABASEHOST" {
+variable "DBHOST" {
   type = string
 }
 
@@ -128,7 +128,7 @@ build {
   provisioner "shell" {
    
     script = "./webapp.sh"
-    environment_vars = ["DATABASEUSER=${var.DATABASEUSER}", "DATABASEPASSWORD=${var.DATABASEPASSWORD}", "DATABASEHOST=${var.DATABASEHOST}", "PORT=${var.PORT}", "DATABASE=${var.DATABASE}", "DBPORT=${var.DBPORT}"]
+    environment_vars = ["DBUSER=${var.DBUSER}", "DBPASS=${var.DBPASS}", "DBHOST=${var.DBHOST}", "PORT=${var.PORT}", "DATABASE=${var.DATABASE}", "DBPORT=${var.DBPORT}"]
 
   }
 }
