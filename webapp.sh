@@ -2,13 +2,6 @@
 
 sudo yum update -y
 
-# export DBHOST=${DBHOST}
-# export DBUSER=${DBUSER}
-# export DBPASS=${DBPASS}
-# export DATABASE=${DATABASE}
-# export PORT=${PORT}
-# export DBPORT=${DBPORT}
-
 sudo yum install -y gcc-c++ make
 curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
 sudo yum install -y nodejs
@@ -29,17 +22,11 @@ echo PORT=${PORT} >> .env
 echo DBPORT=${DBPORT} >> .env
 npm i
 
-#Giving exec writes to owner, user and group
-# chmod -R 755 node_modules/
-# rm -rf node_modules/
-# npm i
 
 sudo cp ./webapp.service /etc/systemd/system/
 
 sudo systemctl daemon-reload
 sudo systemctl enable webapp.service
-# sudo systemctl start webapp.service
-
 
 
 # Install nginx
