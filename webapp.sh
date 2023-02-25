@@ -2,12 +2,12 @@
 
 sudo yum update -y
 
-export DBHOST=${DBHOST}
-export DBUSER=${DBUSER}
-export DBPASS=${DBPASS}
-export DATABASE=${DATABASE}
-export PORT=${PORT}
-export DBPORT=${DBPORT}
+# export DBHOST=${DBHOST}
+# export DBUSER=${DBUSER}
+# export DBPASS=${DBPASS}
+# export DATABASE=${DATABASE}
+# export PORT=${PORT}
+# export DBPORT=${DBPORT}
 
 sudo yum install -y gcc-c++ make
 curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
@@ -21,6 +21,12 @@ sudo systemctl enable mariadb
 
 unzip webapp.zip -d webapp
 cd /home/ec2-user/webapp
+echo DBHOST=${DBHOST} > .env
+echo DBUSER=${DBUSER} >> .env
+echo DBPASS=${DBPASS} >> .env
+echo DATABASE=${DATABASE} >> .env
+echo PORT=${PORT} >> .env
+echo DBPORT=${DBPORT} >> .env
 npm i
 
 #Giving exec writes to owner, user and group
