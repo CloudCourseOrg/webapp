@@ -8,7 +8,7 @@ Creating an  API to perform post, get and update user data data.
 1.Visual studio code (IDE)
 2.POSTMAN
 3.Database - MySQL
-4.Node.js
+4.Node.js..
 
 ## Dependencies to be installed 
 
