@@ -23,67 +23,6 @@ variable "subnet_id" {
   default = "subnet-0bbabc693fb82b1e0"
 }
 
-variable "DBUSER" {
-  type = string
-  
-}
-
-variable "DBPASS" {
-  type = string
-}
-
-
-variable "DBHOST" {
-  type = string
-}
-
-variable "PORT" {
-  type = string
-}
-
-variable "DBPORT" {
-  type = string
-}
-
-variable "DATABASE" {
-  type = string
-}
-
-variable "instance_type" {
-  type = string
-  default="t2.micro"
-}
-
-variable "profile" {
-  type = string
-  default="packer"
-}
-
-variable "device_name" {
-  type = string
-  default="/dev/xvda"
-}
-
-variable "volume_size" {
-  type = number
-  default=8
-}
-
-variable "volume_type" {
-  type = string
-  default="gp2"
-}
-
-variable "region" {
-  type = list(string)
-  default=["us-east-1"]
-}
-
-variable "ami_users" {
-  type    = list(string)
-  default = ["600779742576","921273005274"]
-}
-
 // variable "DBUSER" {
 //   type = string
 // }
