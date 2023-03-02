@@ -84,12 +84,44 @@ variable "ami_users" {
   default = ["600779742576","921273005274"]
 }
 
+// variable "DBUSER" {
+//   type = string
+// }
+
+// variable "DBPASS" {
+//   type = string
+// }
+
+
+// variable "DBHOST" {
+//   type = string
+// }
+
+// variable "PORT" {
+//   type = string
+// }
+
+// variable "DBPORT" {
+//   type = string
+// }
+
+// variable "DATABASE" {
+//   type = string
+// }
+
+variable "ami_users" {
+  type    = list(string)
+  default = ["921273005274"]
+}
+
 source "amazon-ebs" "app-ami" {
   region          = "${var.aws_region}"
-  ami_name = "csye6225_${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
-  ami_description = "AMI"
-  ami_regions = "${var.region}"
+  ami_name        = "ami-1"
+  ami_description = "AMI test"
   ami_users       =   var.ami_users
+  ami_regions = [
+    "us-east-1",
+  ]
 
   aws_polling {
     delay_seconds = 120
@@ -97,18 +129,18 @@ source "amazon-ebs" "app-ami" {
   }
 
 
-  instance_type = "${var.instance_type}"
+  instance_type = "t2.micro"
   source_ami    = "${var.source_ami}"
   ssh_username  = "${var.ssh_username}"
   subnet_id     = "${var.subnet_id}"
   vpc_id = "${var.vpc_id}"
-  profile       = "${var.profile}"
+  profile       = "dev"
 
   launch_block_device_mappings {
     delete_on_termination = true
-    device_name           = "${var.device_name}"
-    volume_size           = var.volume_size
-    volume_type           = "${var.volume_type}"
+    device_name           = "/dev/xvda"
+    volume_size           = 8
+    volume_type           = "gp2"
   }
 }
 
@@ -121,10 +153,13 @@ build {
   }
 
   provisioner "shell" {
-   
+    // environment_vars = [
+    //   "DEBIAN_FRONTEND=noninteractive",
+    //   "CHECKPOINT_DISABLE=1"
+    // ]
+
     script = "./webapp.sh"
-    environment_vars = ["DBUSER=${var.DBUSER}", "DBPASS=${var.DBPASS}", "DBHOST=${var.DBHOST}", "PORT=${var.PORT}", "DATABASE=${var.DATABASE}", "DBPORT=${var.DBPORT}"]
+    // environment_vars = ["DBUSER=${var.DBUSER}", "DBPASS=${var.DBPASS}", "DBHOST=${var.DBHOST}", "PORT=${var.PORT}", "DATABASE=${var.DATABASE}", "DBPORT=${var.DBPORT}"]
 
   }
-
 }
