@@ -15,23 +15,22 @@ variable "ssh_username" {
 
 variable "vpc_id" {
   type    = string
-  default = "vpc-098e4ef8f142b536e"
+  default = "vpc-01276ec252f7960ce"
 }
 
 variable "subnet_id" {
   type    = string
-  default = "subnet-0bbabc693fb82b1e0"
+  default = "subnet-051481c62c6ff86a6"
 }
-
 
 variable "ami_users" {
   type    = list(string)
-  default = ["921273005274"]
+  default = ["680696435068"]
 }
 
 source "amazon-ebs" "app-ami" {
   region          = "${var.aws_region}"
-  ami_name        = "ami-1"
+  ami_name        = "csye6225_${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
   ami_description = "AMI test"
   ami_users       =   var.ami_users
   ami_regions = [
@@ -49,7 +48,7 @@ source "amazon-ebs" "app-ami" {
   ssh_username  = "${var.ssh_username}"
   subnet_id     = "${var.subnet_id}"
   vpc_id = "${var.vpc_id}"
-  profile       = "dev"
+  profile       = "dev"  
 
   launch_block_device_mappings {
     delete_on_termination = true
@@ -68,9 +67,6 @@ build {
   }
 
   provisioner "shell" {
-    
-
-    script = "./webapp.sh"
-
+    script = "./packer/webapp.sh"
   }
 }

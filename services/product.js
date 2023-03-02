@@ -6,7 +6,7 @@ const createNewProduct = async (req, res) => {
     !req.body.description || 
     !req.body.sku || 
     !req.body.manufacturer ||
-    !req.body.quantity ||
+    req.body.quantity===null ||
     (req.body.quantity && (req.body.quantity < 0 || typeof req.body.quantity === 'string' || req.body.quantity > 100))) {
         return res.status(400).json({
             message: "Bad request"
@@ -57,7 +57,7 @@ const putProductInfo = async (req, res) => {
     !req.body.description || 
     !req.body.sku || 
     !req.body.manufacturer ||
-    !req.body.quantity ||
+    req.body.quantity===null ||
     (req.body.quantity && (req.body.quantity < 0 || typeof req.body.quantity === 'string' || req.body.quantity > 100)) ||
     Object.keys(req.body).length > 5) {
         return res.status(400).json({
@@ -107,7 +107,7 @@ const patchProductInfo = async (req, res) => {
     
     let nullCheck = false;
     Object.keys(req.body).forEach((key) => {
-        if(!req.body[key]) {
+        if(!req.body[key] && req.body[key] !== 0) {
             nullCheck = true;
         }
         if(fieldKeys.includes(key)) {
