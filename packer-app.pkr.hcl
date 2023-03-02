@@ -15,12 +15,12 @@ variable "ssh_username" {
 
 variable "vpc_id" {
   type    = string
-  default = "vpc-098e4ef8f142b536e"
+  default = "vpc-01276ec252f7960ce"
 }
 
 variable "subnet_id" {
   type    = string
-  default = "subnet-0bbabc693fb82b1e0"
+  default = "subnet-051481c62c6ff86a6"
 }
 
 // variable "DBUSER" {
@@ -50,7 +50,7 @@ variable "subnet_id" {
 
 variable "ami_users" {
   type    = list(string)
-  default = ["921273005274"]
+  default = ["680696435068"]
 }
 
 source "amazon-ebs" "app-ami" {
