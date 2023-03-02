@@ -1,18 +1,3 @@
- The following is a guide for creating an Amazon Machine Image (AMI) using Packer and shell script. The Packer file will create an AMI file which can be shared across Dev and Demo accounts. Once the AMI is created, an EC2 instance can be created using Terraform. The public address of the instance can be obtained and the Webapp that was created can be run.
-
-The Webapp is used for API testing and is created using Node.js and MYSQL2. The API requests can be tested using POSTMAN. The  prerequisites for this project include Visual Studio Code, POSTMAN, MySQL database, Node.js, AWS, and Terraform.
-
-The .sh file includes dependencies that need to be installed, such as Node.js and Mariadb. The commands in the .sh file include unzipping the Webapp.zip file, installing …
- The following is a guide for creating an Amazon Machine Image (AMI) using Packer and shell script. The Packer file will create an AMI file which can be shared across Dev and Demo accounts. Once the AMI is created, an EC2 instance can be created using Terraform. The public address of the instance can be obtained and the Webapp that was created can be run.
-
-The Webapp is used for API testing and is created using Node.js and MYSQL2. The API requests can be tested using POSTMAN. The prerequisites for this project include Visual Studio Code, POSTMAN, MySQL database, Node.js, AWS, and Terraform.
-
-The .sh file includes dependencies that need to be installed, such as Node.js and Mariadb. The commands in the .sh file include unzipping the Webapp.zip file, installing nginx, and enabling and starting webapp and nginx services.
-
-The endpoints available for operations include GET, POST, PUT, PATCH, and DELETE requests for users and products. The HTTP messages that can be received include "200 OK," "201 Created," "204 No Content," "400 Bad Request," "401 Unauthenticated," "403 Forbidden," and "500 Internal Server Error."
-
-To test the API calls, appropriate files need to be created in an IDE and the code can be written. POSTMAN can be used to test the APIs, and the database can be checked after each API call to see the status. After testing, a pull request with a detailed description of changes can be created
-
 ## Prerequisites
 
 1.Visual studio code (IDE)
