@@ -1,7 +1,7 @@
 name: Packer
 
 on:
-  push:
+  pull_request:
     branches: [main]
 
   workflow_dispatch:
@@ -13,12 +13,12 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      PKR_VAR_DBUSER: ${{ secrets.DBUSER }}
-      PKR_VAR_DBPASS: ${{ secrets.DBPASS }}
-      PKR_VAR_DBHOST: ${{ secrets.DBHOST }}
-      PKR_VAR_DBPORT: ${{ secrets.DBPORT }}
-      PKR_VAR_PORT: ${{ secrets.PORT }}
-      PKR_VAR_DATABASE: ${{ secrets.DATABASE }}
+      # PKR_VAR_DBUSER: ${{ secrets.DBUSER }}
+      # PKR_VAR_DBPASS: ${{ secrets.DBPASS }}
+      # PKR_VAR_DBHOST: ${{ secrets.DBHOST }}
+      # PKR_VAR_DBPORT: ${{ secrets.DBPORT }}
+      # PKR_VAR_PORT: ${{ secrets.PORT }}
+      # PKR_VAR_DATABASE: ${{ secrets.DATABASE }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v1

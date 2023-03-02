@@ -10,9 +10,10 @@ const productRoutes = require('./api-routes/productRoutes');
 
 const db = require('./config/dbSetup');
 db.user.hasMany(db.product, {foreignKey: "owner_user_id"});
+db.product.hasMany(db.image, {foreignKey: "product_id"});
 db.sequelize.sync({force: false})
   .then(() => console.log("Database setup complete."))
-  .catch(() => console.log("Database setup failed."))
+  .catch((err) => console.log("Database setup failed.", err))
 
 app.get('/healthz',function(req, res) {
     res.status(200).send(); 
