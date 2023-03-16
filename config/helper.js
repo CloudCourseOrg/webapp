@@ -97,6 +97,7 @@ const imAuth = async (req, res, next) => {
   let imageObj = await db.image.findOne({where: {product_id: id, image_id: imageId}});
 
   if(!imageObj) {
+    
     return res.status(403).json({
       message: "Forbidden",
     });
