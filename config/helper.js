@@ -87,6 +87,13 @@ const imAuth = async (req, res, next) => {
   const id = req?.params?.id;
   const imageId = req?.params?.imageId;
 
+  let img = await db.image.findOne({where: {image_id: imageId}});
+  if(!img) {
+    return res.status(404).json({
+      message: "Not Found",
+    });
+  }
+  
   let imageObj = await db.image.findOne({where: {product_id: id, image_id: imageId}});
 
   if(!imageObj) {
