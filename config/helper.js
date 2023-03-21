@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
-// const dbFuncs = require('../models/dbFuncs');
 const db = require('../config/dbSetup');
+const StatsD = require('node-statsd');
+const client = new StatsD();
 
 const createPassHash = async (pass) => {
     const salt = await bcrypt.genSalt();
@@ -93,11 +94,10 @@ const imAuth = async (req, res, next) => {
       message: "Not Found",
     });
   }
-  
+
   let imageObj = await db.image.findOne({where: {product_id: id, image_id: imageId}});
 
   if(!imageObj) {
-    
     return res.status(403).json({
       message: "Forbidden",
     });
@@ -178,5 +178,6 @@ module.exports = {
     getDecryptedCreds,
     pAuthCheck,
     imAuth,
-    checkFileType
+    checkFileType,
+    client
 }
