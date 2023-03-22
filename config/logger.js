@@ -11,7 +11,7 @@ const logFormat = format.printf(({ level, message, timestamp ,stack}) => {
 var options = {
   file: {
     level: 'info',
-    filename: `../../../var/log/combined.log`,
+    filename: `../../../../var/log/combined.log`,
     handleExceptions: true,
     json: true,
     maxsize: 5242880, // 5MB

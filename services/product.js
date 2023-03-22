@@ -2,6 +2,7 @@ const helper = require('../config/helper');
 const db = require('../config/dbSetup');
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
+const logger = require('./config/logger');
 const BUCKET_NAME = process.env.BUCKETNAME;
 
 const createNewProduct = async (req, res) => {
@@ -11,6 +12,8 @@ const createNewProduct = async (req, res) => {
     !req.body.manufacturer ||
     req.body.quantity===null ||
     (req.body.quantity && (req.body.quantity < 0 || typeof req.body.quantity === 'string' || req.body.quantity > 100))) {
+        logger.error("Bad Request");
+
         return res.status(400).json({
             message: "Bad request"
         });
@@ -50,6 +53,8 @@ const createNewProduct = async (req, res) => {
         }
         return res.status(201).json(result);
     }catch(err) {
+        logger.error("Bad Request");
+
         console.log("DB Error ", err);
         res.status(400).send("Bad Request");
     }
@@ -63,6 +68,8 @@ const putProductInfo = async (req, res) => {
     req.body.quantity===null ||
     (req.body.quantity && (req.body.quantity < 0 || typeof req.body.quantity === 'string' || req.body.quantity > 100)) ||
     Object.keys(req.body).length > 5) {
+        logger.error("Bad Request");
+
         return res.status(400).json({
             message: "Bad request"
         });
@@ -73,6 +80,8 @@ const putProductInfo = async (req, res) => {
     try{
         let prodObj = await db.product.findOne({where:{sku:req.body.sku}});
         if(prodObj && prodObj.dataValues.id != id) {
+            logger.error("Bad Request");
+
             return res.status(400).json({
                 message: "Bad request!! The entered sku value already exists."
             });
@@ -91,6 +100,8 @@ const putProductInfo = async (req, res) => {
         })
         return res.status(204).send(); 
     }catch(err) {
+        logger.error("Bad Request");
+
         console.log("DB Error ", err);
         res.status(400).send("Bad Request");
     }
@@ -98,6 +109,8 @@ const putProductInfo = async (req, res) => {
 
 const patchProductInfo = async (req, res) => {
     if((req.body.quantity && (req.body.quantity < 0 || typeof req.body.quantity === 'string' || req.body.quantity > 100))) {
+        logger.error("Bad Request");
+
         return res.status(400).json({
             message: "Bad request"
         });
@@ -119,6 +132,8 @@ const patchProductInfo = async (req, res) => {
     });
 
     if(!Object.keys(fieldData).length || nullCheck) {
+        logger.error("Bad Request");
+
         return res.status(400).send("Bad Request. Incorrect data.");
     }
 
@@ -126,6 +141,8 @@ const patchProductInfo = async (req, res) => {
         if(req.body.sku) {
             let prodObj = await db.product.findOne({where:{sku:req.body.sku}});
             if(prodObj && prodObj.dataValues.id != id) {
+                logger.error("Bad Request");
+
                 return res.status(400).json({
                     message: "Bad request!! The entered sku value already exists."
                 });
@@ -139,6 +156,8 @@ const patchProductInfo = async (req, res) => {
         })
         return res.status(204).send(); 
     }catch(err) {
+        logger.error("Bad Request");
+
         console.log("DB Error ", err);
         res.status(400).send("Bad Request");
     }
@@ -147,6 +166,8 @@ const patchProductInfo = async (req, res) => {
 const deleteProduct = async (req, res) => {
 
     if(req._body) {
+        logger.error("Bad Request");
+
         return res.status(400).send("Bad Request");
     }
 
@@ -174,6 +195,8 @@ const deleteProduct = async (req, res) => {
         })
         return res.status(204).send(); 
     }catch(err) {
+        logger.error("Bad Request");
+
         console.log("DB Error ", err);
         res.status(400).send("Bad Request");
     }
@@ -181,6 +204,8 @@ const deleteProduct = async (req, res) => {
 
 const getProduct = async(req, res) => {
     if(req._body) {
+        logger.error("Bad Request");
+
         return res.status(400).send("Bad Request");
     }
     
@@ -193,6 +218,8 @@ const getProduct = async(req, res) => {
             }
         });
         if(!data) {
+            logger.error("Not Found");
+
             return res.status(404).json({
                 message: "Not Found"
             });
@@ -210,6 +237,8 @@ const getProduct = async(req, res) => {
         }
         return res.status(200).json(result); 
     }catch(err) {
+        logger.error("Bad Request");
+
         console.log("DB Error ", err);
         res.status(400).send("Bad Request");
     }

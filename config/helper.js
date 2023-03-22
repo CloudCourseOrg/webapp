@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const db = require('../config/dbSetup');
 const StatsD = require('node-statsd');
 const client = new StatsD();
+const logger = require('./config/logger');
 
 const createPassHash = async (pass) => {
     const salt = await bcrypt.genSalt();
@@ -25,6 +26,7 @@ const uAuthCheck = async (req, res, next) => {
 
   //Check if auth header is present and is a basic auth header.
   if (!req.headers.authorization || req.headers.authorization.indexOf("Basic ") === -1) {
+    logger.error("Unauthorized");
     return res.status(401).json({ message: "Unauthorized" });
   }
 
@@ -36,6 +38,7 @@ const uAuthCheck = async (req, res, next) => {
   let userAccCheck = await validUser(userName, pass);
 
   if (!userName || !pass || !userAccCheck) {
+    logger.error("Unauthorized");
     return res.status(401).json({
       message: "Unauthorized",
     });
@@ -44,6 +47,7 @@ const uAuthCheck = async (req, res, next) => {
   //Check if user creds match the user at id.
   let dbCheck = await dbCredVal(userName, pass,id);
   if(dbCheck) {
+    logger.error("Forbidden");
       return res.status((dbCheck=='Forbidden')?403:404).json({
         message: dbCheck,
       });
@@ -55,6 +59,7 @@ const uAuthCheck = async (req, res, next) => {
 const pAuthCheck = async (req, res, next) => {
   //Check if auth header is present and is a basic auth header.
   if (!req.headers.authorization || req.headers.authorization.indexOf("Basic ") === -1) {
+    logger.error("Unauthorized");
     return res.status(401).json({ message: "Unauthorized" });
   }
 
@@ -66,6 +71,7 @@ const pAuthCheck = async (req, res, next) => {
   let userAccCheck = await validUser(userName, pass);
 
   if (!userName || !pass || !userAccCheck) {
+    logger.error("Unauthorized");
     return res.status(401).json({
       message: "Unauthorized",
     });
@@ -75,6 +81,7 @@ const pAuthCheck = async (req, res, next) => {
     //Check if user creds match the product at id.
     let dbCheck = await dbProdVal(userName, pass,id);
     if(dbCheck) {
+      logger.error("Forbidden");
         return res.status((dbCheck=='Forbidden')?403:404).json({
           message: dbCheck,
         });
@@ -90,6 +97,7 @@ const imAuth = async (req, res, next) => {
 
   let img = await db.image.findOne({where: {image_id: imageId}});
   if(!img) {
+    logger.error("Not Found");
     return res.status(404).json({
       message: "Not Found",
     });
@@ -98,6 +106,7 @@ const imAuth = async (req, res, next) => {
   let imageObj = await db.image.findOne({where: {product_id: id, image_id: imageId}});
 
   if(!imageObj) {
+    logger.error("Forbidden");
     return res.status(403).json({
       message: "Forbidden",
     });

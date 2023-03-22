@@ -26,6 +26,7 @@ app.use('/v1/product',productRoutes);
 
 app.use(methodOverride())
 app.use((err, req, res, next) => {
+  logger.error("Bad Request");
   return res.status(400).json({message: "Bad Request"});
 })
 

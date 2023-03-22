@@ -4,6 +4,7 @@ const path = require("path");
 const AWS = require('aws-sdk');
 const uploadFile = require("../middleware/upload");
 const db = require('../config/dbSetup');
+const logger = require('./config/logger');
 const BUCKET_NAME = process.env.BUCKETNAME;
 
 const helper = require('../config/helper')
@@ -15,6 +16,8 @@ const upload = async (req,res) => {
         await uploadFile(req, res);
     
         if (req.file == undefined || !helper.checkFileType(req.file.mimetype.split('/')[1])) {
+            logger.error("Bad Request");
+
           return res.status(400).send({ message: "Bad Request!! Please upload a file." });
         }
 
@@ -61,6 +64,8 @@ const upload = async (req,res) => {
 
         res.status(201).json(result);
     } catch (err) {
+        logger.error("Could not upload the file");
+
         res.status(500).send({
           message: `Could not upload the file: ${req.file.originalname}. ${err}`,
         });
@@ -77,6 +82,8 @@ const getImageMeta = async (req, res) => {
             }
         });
         if(!data) {
+            logger.error("Not Found");
+
             return res.status(404).json({
                 message: "Not Found"
             });
@@ -90,6 +97,7 @@ const getImageMeta = async (req, res) => {
         }
         return res.status(200).json(result); 
     }catch(err) {
+        logger.error("Bad Request");
         console.log("DB Error ", err);
         res.status(400).send("Bad Request");
     }
@@ -118,6 +126,9 @@ const delImage = async (req, res) => {
 
         return res.status(204).send(); 
     }catch(err) {
+        
+        logger.error("Bad Request");
+
         console.log("DB Error ", err);
         res.status(400).send("Bad Request");
     }
@@ -142,6 +153,8 @@ const getAllImages = async (req, res) => {
 
         return res.status(200).json(result); 
     }catch(err) {
+        logger.error("Bad Request");
+
         console.log("DB Error ", err);
         res.status(400).send("Bad Request");
     }
