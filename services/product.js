@@ -51,6 +51,7 @@ const createNewProduct = async (req, res) => {
             "date_last_updated": data.dataValues.date_last_updated,
             "owner_user_id": data.dataValues.owner_user_id
         }
+        logger.info("Product created successfully");
         return res.status(201).json(result);
     }catch(err) {
         logger.error("Bad Request");

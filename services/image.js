@@ -6,12 +6,13 @@ const uploadFile = require("../middleware/upload");
 const db = require("../config/dbSetup");
 const logger = require("../config/logger");
 const BUCKET_NAME = process.env.BUCKETNAME;
-
 const helper = require("../config/helper");
 
 const s3 = new AWS.S3();
 
 const upload = async (req, res) => {
+  helper.client.increment('Uploading image');
+
   try {
     await uploadFile(req, res);
 
@@ -82,6 +83,7 @@ const upload = async (req, res) => {
 
 const getImageMeta = async (req, res) => {
   let id = req.params.imageId;
+  helper.client.increment('get image');
 
   try {
     let data = await db.image.findOne({
@@ -113,6 +115,8 @@ const getImageMeta = async (req, res) => {
 };
 
 const delImage = async (req, res) => {
+  helper.client.increment('delete image');
+
   let id = req.params.imageId;
   try {
     let data = await db.image.findOne({
@@ -145,7 +149,7 @@ const delImage = async (req, res) => {
 
 const getAllImages = async (req, res) => {
   let id = req.params.id;
-
+  helper.client.increment('getting all images');
   try {
     let data = await db.image.findAll({
       where: {
