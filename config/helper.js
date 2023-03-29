@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const db = require('../config/dbSetup');
 const StatsD = require('node-statsd');
 const client = new StatsD();
-const logger = require('./config/logger');
+const logger = require('./logger');
 
 const createPassHash = async (pass) => {
     const salt = await bcrypt.genSalt();

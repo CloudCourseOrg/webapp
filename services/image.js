@@ -4,7 +4,7 @@ const path = require("path");
 const AWS = require("aws-sdk");
 const uploadFile = require("../middleware/upload");
 const db = require("../config/dbSetup");
-const logger = require("./config/logger");
+const logger = require("../config/logger");
 const BUCKET_NAME = process.env.BUCKETNAME;
 
 const helper = require("../config/helper");

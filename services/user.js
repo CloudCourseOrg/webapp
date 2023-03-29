@@ -1,6 +1,6 @@
 const helper = require('../config/helper');
 const db = require('../config/dbSetup');
-const logger = require('./config/logger');
+const logger = require('../config/logger');
 
 const createNewUser = async ( req, res) => {
     //Check if req object is correct and throw err as approriate.

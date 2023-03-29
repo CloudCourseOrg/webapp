@@ -2,7 +2,7 @@ const helper = require('../config/helper');
 const db = require('../config/dbSetup');
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
-const logger = require('./config/logger');
+const logger = require('../config/logger');
 const BUCKET_NAME = process.env.BUCKETNAME;
 
 const createNewProduct = async (req, res) => {
