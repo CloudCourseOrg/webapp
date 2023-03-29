@@ -1,26 +1,34 @@
 const helper = require('../config/helper');
 const db = require('../config/dbSetup');
+const logger = require('../config/logger');
 
 const createNewUser = async ( req, res) => {
     //Check if req object is correct and throw err as approriate.
+    logger.info("POST_user");
+    helper.client.increment("'post-user")
     let check = true;
     if(!req.body.first_name) {
+        logger.error("check failed. first name is required");
         check = false;
     }
 
     if(!req.body.last_name) {
+        logger.error("check failed. last name is required");
         check = false;
     }
 
     if(!req.body.username || !helper.validateEmail(req.body.username)) {
+        logger.error("check failed. valid username name is required");
         check = false;
     }
 
     if(!req.body.password) {
+        logger.error("check failed. valid password name is required");
         check = false;
     }
 
     if(!check) {
+        logger.error("Bad request");
         return res.status(400).json({
             message: "Bad request"
         });
@@ -58,6 +66,8 @@ const createNewUser = async ( req, res) => {
         }
         return res.status(201).json(result);
     }catch(err) {
+        logger.error("Bad Request");
+
         console.log("DB Error");
         res.status(400).send("Bad Request");
     }
@@ -72,6 +82,8 @@ const getUser = async (req, res) => {
     }
 
     if(!check) {
+        logger.error("Bad Request");
+
         return res.status(400).json({
             message: "Bad request"
         });
@@ -82,6 +94,8 @@ const getUser = async (req, res) => {
     try{
         let result = await db.user.findOne({where:{id:id}});
         if (!result) {
+            logger.error("Bad Request");
+
             return res.status(400).json({
               message: "Bad Request"});
         }
@@ -96,6 +110,8 @@ const getUser = async (req, res) => {
     
         return res.status(200).json(fResult); 
     }catch(err) {
+        logger.error("Bad Request");
+
         console.log("DB Error");
         res.status(400).send("Bad Request");
     }
@@ -122,6 +138,8 @@ const updateUser = async (req, res) => {
     }
 
     if(!check) {
+        logger.error("Bad Request");
+
         return res.status(400).json({
             message: "Bad request"
         });
@@ -145,6 +163,8 @@ const updateUser = async (req, res) => {
         })
         return res.status(204).send(); 
     }catch(err) {
+        logger.error("Bad Request");
+
         console.log('DB Error');
         res.status(400).send("Bad Request");
     }
