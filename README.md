@@ -5,7 +5,7 @@
 3.Database - MySQL
 4.Node.js
 5. AWS
-6. Terraform
+6.  Terraform
 
 ## Dependencies to be installed .sh file
 
