@@ -44,12 +44,14 @@ const createNewUser = async (req, res) => {
     attributes: ["password"],
   });
   if (resultant?.dataValues?.password) {
+    logger.error("User Already Exists");
     return res.status(400).json({
       message: "Bad request",
     });
   }
 
   try {
+    logger.info("Checks Passed.");
     let data = await db.user.create({
       first_name: fName,
       last_name: lName,
@@ -67,6 +69,7 @@ const createNewUser = async (req, res) => {
       account_created: data.dataValues.account_created,
       account_updated: data.dataValues.account_updated,
     };
+    logger.info("User Successfully added");
     return res.status(201).json(result);
   } catch (err) {
     logger.error("Bad Request");
@@ -77,6 +80,8 @@ const createNewUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
+  logger.info(`Get - user for id - ${req.params.id}.`);
+  helper.statsdClient.increment("get");
   //Check if req object is correct and throw err as approriate.
   check = true;
 
@@ -95,6 +100,7 @@ const getUser = async (req, res) => {
   let id = req.params.id;
 
   try {
+    logger.error("Checks passed.");
     let result = await db.user.findOne({ where: { id: id } });
     if (!result) {
       logger.error("Bad Request");
@@ -122,6 +128,8 @@ const getUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+  logger.info(`UPDATE - user for id - ${req.params.id}.`);
+  helper.statsdClient.increment("update user");
   //Check if req object is correct and throw err as approriate
   let check = true;
 
@@ -168,10 +176,10 @@ const updateUser = async (req, res) => {
         },
       }
     );
+    logger.info("User Successfully updated");
     return res.status(204).send();
   } catch (err) {
     logger.error("Bad Request");
-
     console.log("DB Error");
     res.status(400).send("Bad Request");
   }
