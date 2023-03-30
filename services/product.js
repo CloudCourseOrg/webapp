@@ -34,7 +34,7 @@ const createNewProduct = async (req, res) => {
         message: "Bad request!! The entered sku value already exists.",
       });
     }
-    helper.client.info("All checks passed successfully");
+    logger.info("All checks passed successfully");
     let { userName, pass } = helper.getDecryptedCreds(
       req.headers.authorization
     );
@@ -131,7 +131,7 @@ const putProductInfo = async (req, res) => {
 };
 
 const patchProductInfo = async (req, res) => {
-  helper.logger.info("PATCH - Product ");
+  logger.info("PATCH - Product ");
   helper.client.increment("PATCH - product");
 
   if (
