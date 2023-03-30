@@ -71,7 +71,7 @@ const upload = async (req, res) => {
       date_created: imageObj.dataValues.date_created,
       s3_bucket_path: imageObj.dataValues.s3_bucket_path,
     };
-    helper.logger.info("Image added Successfully - ", result);
+    logger.info("Image added Successfully - ", result);
 
     res.status(201).json(result);
   } catch (err) {
@@ -152,7 +152,7 @@ const delImage = async (req, res) => {
 
 const getAllImages = async (req, res) => {
   let id = req.params.id;
-  helper.logger.info("Getting all images - ", req.params.id);
+  logger.info("Getting all images - ", req.params.id);
 
   helper.client.increment("getting all images");
   try {
