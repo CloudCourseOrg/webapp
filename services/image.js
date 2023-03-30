@@ -11,7 +11,8 @@ const helper = require("../config/helper");
 const s3 = new AWS.S3();
 
 const upload = async (req, res) => {
-  helper.client.increment('Uploading image');
+  helper.client.increment("Uploading image");
+  logger.info("POST - Image");
 
   try {
     await uploadFile(req, res);
@@ -70,10 +71,11 @@ const upload = async (req, res) => {
       date_created: imageObj.dataValues.date_created,
       s3_bucket_path: imageObj.dataValues.s3_bucket_path,
     };
+    helper.logger.info("Image added Successfully - ", result);
 
     res.status(201).json(result);
   } catch (err) {
-    logger.error("Could not upload the file");
+    logger.error("DB error - Could not upload the file");
 
     res.status(500).send({
       message: `Could not upload the file: ${req.file.originalname}. ${err}`,
@@ -83,7 +85,8 @@ const upload = async (req, res) => {
 
 const getImageMeta = async (req, res) => {
   let id = req.params.imageId;
-  helper.client.increment('get image');
+  logger.info("GET Image for id - ", req.params.imageId);
+  helper.client.increment("get image");
 
   try {
     let data = await db.image.findOne({
@@ -92,7 +95,7 @@ const getImageMeta = async (req, res) => {
       },
     });
     if (!data) {
-      logger.error("Not Found");
+      logger.error("Image Not Found");
 
       return res.status(404).json({
         message: "Not Found",
@@ -108,15 +111,15 @@ const getImageMeta = async (req, res) => {
     logger.info(`Image metadata with id ${id} retrieved successfully.`);
     return res.status(200).json(result);
   } catch (err) {
-    logger.error("Bad Request");
+    logger.error("DB Error");
     console.log("DB Error ", err);
     res.status(400).send("Bad Request");
   }
 };
 
 const delImage = async (req, res) => {
-  helper.client.increment('delete image');
-
+  helper.client.increment("delete image");
+  logger.info("Image delete for id - ", req.params.imageId);
   let id = req.params.imageId;
   try {
     let data = await db.image.findOne({
@@ -149,7 +152,9 @@ const delImage = async (req, res) => {
 
 const getAllImages = async (req, res) => {
   let id = req.params.id;
-  helper.client.increment('getting all images');
+  helper.logger.info("Getting all images - ", req.params.id);
+
+  helper.client.increment("getting all images");
   try {
     let data = await db.image.findAll({
       where: {
