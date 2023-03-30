@@ -81,7 +81,7 @@ const createNewUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   logger.info(`Get - user for id - ${req.params.id}.`);
-  helper.statsdClient.increment("get");
+  helper.client.increment("get users");
   //Check if req object is correct and throw err as approriate.
   check = true;
 
@@ -129,7 +129,7 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   logger.info(`UPDATE - user for id - ${req.params.id}.`);
-  helper.statsdClient.increment("update user");
+  helper.client.increment("update user");
   //Check if req object is correct and throw err as approriate
   let check = true;
 
