@@ -1,41 +1,41 @@
 ## Prerequisites
 
-1.Visual studio code (IDE)
-2.POSTMAN
-3.Database - MySQL
-4.Node.js
-5. AWS
-6. Terraform
+1.Visual studio code (IDE)<br/>
+2.POSTMAN<br/>
+3.Database - MySQL<br/>
+4.Node.js<br/>
+5. AWS<br/>
+6. Terraform<br/>
 
 ## Dependencies to be installed .sh file
 
-install node
-sudo yum install -y gcc-c++ make
-curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
-sudo yum install -y nodejs
+install node <br/>
+sudo yum install -y gcc-c++ make<br/>
+curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -<br/>
+sudo yum install -y nodejs<br/>
 
-#unzip the file
-unzip webapp.zip -d webapp
-cd /home/ec2-user/webapp
-npm i
+#unzip the file<br/>
+unzip webapp.zip -d webapp<br/>
+cd /home/ec2-user/webapp<br/>
+npm i<br/>
 
-sudo cp ./webapp.service /etc/systemd/system/
+sudo cp ./webapp.service /etc/systemd/system/<br/>
 
-sudo systemctl daemon-reload
-sudo systemctl enable webapp.service
+sudo systemctl daemon-reload<br/>
+sudo systemctl enable webapp.service<br/>
 # sudo systemctl start webapp.service
 
 
 
 # Install nginx
-sudo amazon-linux-extras list | grep nginx
-sudo amazon-linux-extras enable nginx1
-sudo yum clean metadata
-sudo yum -y install nginx
-sudo systemctl enable nginx
-sudo cp nginx.conf /etc/nginx/
-sudo systemctl restart nginx
-sudo systemctl reload nginx
+sudo amazon-linux-extras list | grep nginx<br/>
+sudo amazon-linux-extras enable nginx1<br/>
+sudo yum clean metadata<br/>
+sudo yum -y install nginx<br/>
+sudo systemctl enable nginx<br/>
+sudo cp nginx.conf /etc/nginx/<br/>
+sudo systemctl restart nginx<br/>
+sudo systemctl reload nginx<br/>
 
 
 <h4>Important Commands to run the server and test</h4>
@@ -44,25 +44,25 @@ sudo systemctl reload nginx
 ## Endpoints
 The following endpoints are available for operations:
 
-GET - http://localhost:3000/v1/user/{id}
+GET - https://demo.arpitsamsung.me/v1/user/{id}
 
-POST - http://localhost:3000/v1/user
+POST - https://demo.arpitsamsung.me/v1/user
 
-PUT - http://localhost:3000/v1/user/{id}
+PUT - https://demo.arpitsamsung.me/v1/user/{id}
 
-GET - http://localhost:3000/v1/user/{id}
+GET - https://demo.arpitsamsung.me/v1/user/{id}
 
-GET - http://localhost:3000/v1/product/{id}
+GET - https://demo.arpitsamsung.me/v1/product/{id}
 
-POST - http://localhost:3000/v1/product
+POST - https://demo.arpitsamsung.me/v1/product
 
-PUT - http://localhost:3000/v1/product/{id}
+PUT - https://demo.arpitsamsung.me/v1/product/{id}
 
-GET - http://localhost:3000/v1/product/{id}
+GET - https://demo.arpitsamsung.me/v1/product/{id}
 
-PATCH - http://localhost:3000/v1/product/{id}
+PATCH - https://demo.arpitsamsung.me/v1/product/{id}
 
-DELETE - http://localhost:3000/v1/product/{id}
+DELETE - https://demo.arpitsamsung.me/v1/product/{id}
 
 
 ## Responds with following HTTP messages
@@ -94,19 +94,18 @@ Step 4: Check the Database after each and every API is called to see the status 
 
 Test the api
 
-http://localhost:3000/v1/user, where you should see: "200 OK".
+https://demo.arpitsamsung.me/v1/user, where you should see: "200 OK".
 
-http://localhost:3000/v1/user/{id} where you should see: "201 Created".
+https://demo.arpitsamsung.me/v1/user/{id} where you should see: "201 Created".
 
-http://localhost:3000/v1/user/self/ where you should see: "204 No Content".
+https://demo.arpitsamsung.me/v1/user/self/ where you should see: "204 No Content".
 
-http://localhost:3000/v1/user/self where you should use: "204 No Content".
+https://demo.arpitsamsung.me/v1/user/self where you should use: "204 No Content".
 
-http://localhost:3000/v1/product, where you should see: "200 OK".
+https://demo.arpitsamsung.me/v1/product, where you should see: "200 OK".
 
-http://localhost:3000/v1/product/{id} where you should see: "201 Created".
+https://demo.arpitsamsung.me/v1/product/{id} where you should see: "201 Created".
 
-http://localhost:3000/v1/product/self/ where you should see: "204 No Content".
+https://demo.arpitsamsung.me/v1/product/self/ where you should see: "204 No Content".
 
 
-Please create a pull request with a detailed description of changes.
