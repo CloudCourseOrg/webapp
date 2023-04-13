@@ -18,11 +18,11 @@ db.sequelize.sync({force: false})
 
 app.get('/healthz',function(req, res) {
   helper.client.increment('healthz counter start')
-  res.status(200).send(); 
+  res.status(200).send("ok"); 
 });
 app.get('/health',function(req, res) {
   helper.client.increment('healthz counter start')
-  res.status(200).send(); 
+  res.status(200).send("ok"); 
 });
 
 app.use('/v1/user',userRoutes);
