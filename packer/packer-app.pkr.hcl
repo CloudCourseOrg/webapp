@@ -69,4 +69,9 @@ build {
   provisioner "shell" {
     script = "./packer/webapp.sh"
   }
+
+  post-processor "manifest" {
+    output = "manifest.json"
+    strip_path = true
+  }
 }
