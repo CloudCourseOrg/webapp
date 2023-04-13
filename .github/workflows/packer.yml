@@ -42,6 +42,6 @@ jobs:
           LT_ID="${LT_ID#\"}"
           echo $LT_ID
           aws ec2 create-launch-template-version --launch-template-id $LT_ID --version-description WebVersion2 --source-version 1 --launch-template-data "ImageId=$AMI_ID"
-          aws autoscaling update-auto-scaling-group --auto-scaling-group-name csye6225-asg --launch-template LaunchTemplateId=$LT_ID,Version='$Latest'
+          aws autoscaling update-auto-scaling-group --auto-scaling-group-name csye6225-asg-1 --launch-template LaunchTemplateId=$LT_ID,Version='$Latest'
       - name: Refreshing Instances
-        run: aws autoscaling start-instance-refresh --auto-scaling-group-name csye6225-asg
+        run: aws autoscaling start-instance-refresh --auto-scaling-group-name csye6225-asg-1
