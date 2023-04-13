@@ -20,6 +20,10 @@ app.get('/healthz',function(req, res) {
   helper.client.increment('healthz counter start')
   res.status(200).send(); 
 });
+app.get('/health',function(req, res) {
+  helper.client.increment('healthz counter start')
+  res.status(200).send(); 
+});
 
 app.use('/v1/user',userRoutes);
 app.use('/v1/product',productRoutes);
