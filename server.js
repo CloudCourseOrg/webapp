@@ -20,7 +20,7 @@ app.get('/healthz',function(req, res) {
   helper.client.increment('healthz counter start')
   res.status(200).send("ok"); 
 });
-app.get('/health',function(req, res) {
+app.get('/arpit',function(req, res) {
   helper.client.increment('healthz counter start')
   res.status(200).send("ok"); 
 });
